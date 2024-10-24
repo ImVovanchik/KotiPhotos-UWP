@@ -58,6 +58,7 @@ namespace KotiPhotos_UWP
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
+            // Выйти из программы
             Application.Current.Exit();
         }
     }
