@@ -14,7 +14,14 @@
             <RowDefinition Height="251*"/>
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0" HorizontalAlignment="Stretch">
-            <Button x:Name="sourcecode_button" Content="Открыть исходный код" HorizontalAlignment="Stretch" VerticalAlignment="Top" Click="Button_Click"/>
+            <Grid HorizontalAlignment="Stretch">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Button x:Name="sourcecode_button" Content="Открыть исходный код" HorizontalAlignment="Stretch" VerticalAlignment="Top" Click="Button_Click" Grid.Column="0"/>
+                <Button x:Name="refresh_button" Content="Перезагрузить страницу" HorizontalAlignment="Right" VerticalAlignment="Top" Click="RefreshButton_Click" Grid.Column="1"/>
+            </Grid>
         </StackPanel>
 
         <ProgressBar x:Name="progressBar" 
@@ -25,6 +32,6 @@
                      IsIndeterminate="False" 
                      Visibility="Collapsed"/>
 
-        <WebView x:Name="webview_kotiphotos" Grid.RowSpan="2" Margin="0,30,0,0"/>
+        <WebView x:Name="webview_kotiphotos" Grid.RowSpan="2" Margin="10,35,-10,0"/>
     </Grid>
 </Page>
