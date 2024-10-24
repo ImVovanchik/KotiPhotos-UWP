@@ -20,7 +20,7 @@
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
                 <Button x:Name="sourcecode_button" Content="Открыть исходный код" HorizontalAlignment="Stretch" VerticalAlignment="Top" Click="Button_Click" Grid.Column="0"/>
-                <Button x:Name="refresh_button" Content="Перезагрузить страницу" HorizontalAlignment="Right" VerticalAlignment="Top" Click="RefreshButton_Click" Grid.Column="1"/>
+                <Button x:Name="refresh_button" Content="Обновить эту страницу" HorizontalAlignment="Right" VerticalAlignment="Top" Click="RefreshButton_Click" Grid.Column="1"/>
             </Grid>
         </StackPanel>
 
