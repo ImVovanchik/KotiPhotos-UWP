@@ -16,6 +16,15 @@
         <StackPanel Grid.Row="0" HorizontalAlignment="Stretch">
             <Button x:Name="sourcecode_button" Content="Открыть исходный код" HorizontalAlignment="Stretch" VerticalAlignment="Top" Click="Button_Click"/>
         </StackPanel>
+
+        <ProgressBar x:Name="progressBar" 
+                     HorizontalAlignment="Center" 
+                     VerticalAlignment="Center" 
+                     Width="200" 
+                     Height="20" 
+                     IsIndeterminate="False" 
+                     Visibility="Collapsed"/>
+
         <WebView x:Name="webview_kotiphotos" Grid.RowSpan="2" Margin="0,30,0,0"/>
     </Grid>
 </Page>

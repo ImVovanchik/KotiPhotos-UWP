@@ -26,6 +26,8 @@ namespace KotiPhotos_UWP
         public MainPage()
         {
             this.InitializeComponent();
+            webview_kotiphotos.NavigationStarting += webview_kotiphotos_NavigationStarting;
+            webview_kotiphotos.NavigationCompleted += webview_kotiphotos_NavigationCompleted;
             LoadWebView();
         }
 
@@ -38,6 +40,15 @@ namespace KotiPhotos_UWP
         {
             var uri = new Uri("https://github.com/ImVovanchik/KotiPhotos-UWP");
             await Launcher.LaunchUriAsync(uri);
+        }
+
+        private void webview_kotiphotos_NavigationStarting(WebView sender, WebViewNavigationStartingEventArgs args)
+        {
+            progressBar.Visibility = Visibility.Visible;
+        }
+        private void webview_kotiphotos_NavigationCompleted(WebView sender, WebViewNavigationCompletedEventArgs args)
+        {
+            progressBar.Visibility = Visibility.Collapsed;
         }
     }
 }
