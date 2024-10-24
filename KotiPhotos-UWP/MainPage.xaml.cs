@@ -51,7 +51,7 @@ namespace KotiPhotos_UWP
             progressBar.Visibility = Visibility.Collapsed;
         }
 
-        private void RefreshButton_Click(object sender, RoutedEventArgs e)
+        private void RefreshPageButton_Click(object sender, RoutedEventArgs e)
         {
             webview_kotiphotos.Refresh();
         }
