@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -22,26 +23,21 @@ namespace KotiPhotos_UWP
     /// </summary>
     public sealed partial class MainPage : Page
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="KotiPhotos_UWP.MainPage"/> class.
-        /// </summary>
-        /// <remarks>
-        /// This constructor initializes the components of the MainPage and loads the WebView with a predefined URL.
-        /// </remarks>
         public MainPage()
         {
             this.InitializeComponent();
             LoadWebView();
         }
-        /// <summary>
-        /// Loads the WebView control with a predefined URL.
-        /// </summary>
-        /// <remarks>
-        /// This method navigates the WebView control named <c>webview_kotiphotos</c> to the specified URL.
-        /// </remarks>
+
         private void LoadWebView()
         {
             webview_kotiphotos.Navigate(new Uri("https://kotiphotos.serv00.net/uwp.html"));
+        }
+
+        private async void Button_Click(object sender, RoutedEventArgs e)
+        {
+            var uri = new Uri("https://github.com/ImVovanchik/KotiPhotos-UWP");
+            await Launcher.LaunchUriAsync(uri);
         }
     }
 }
