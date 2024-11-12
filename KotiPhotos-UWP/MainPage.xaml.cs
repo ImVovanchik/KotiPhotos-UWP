@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Security.Cryptography.X509Certificates;
 using Windows.ApplicationModel.Core;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
@@ -41,6 +43,22 @@ namespace KotiPhotos_UWP
             update();
         }
 
+        private async Task<string> GetVersionFromServerAsync(string url)
+        {
+            try
+            {
+                using (HttpClient client = new HttpClient())
+                {
+                    string version = await client.GetStringAsync(url); // Получаем строку с версией
+                    return version.Trim(); // Убираем лишние пробелы и символы новой строки
+                }
+            }
+            catch (Exception)
+            {
+                return null; // Если не удалось получить версию, возвращаем null
+            }
+        }
+
         private async void update()
         {
             await Task.Delay(2000); // Ждём 2 секунды перед проверкой обновлений
@@ -56,28 +74,30 @@ namespace KotiPhotos_UWP
             this.Background = new Windows.UI.Xaml.Media.SolidColorBrush(Windows.UI.Colors.Transparent);
         }
 
-        private void checkForUpdates()
+        private async void checkForUpdates()
         {
-            string title = "Произошла ошибка";
-            string content = "Не удалось проверить обновления: Нет имплементации.";
-            string toastXmlString = $@"
-            <toast>
-                <visual>
-                    <binding template='ToastGeneric'>
-                        <text>{title}</text>
-                        <text>{content}</text>
-                    </binding>
-                </visual>
-                <actions>
-                    <action content='Закрыть' arguments='action=close' />
-                </actions>
-            </toast>";
-            XmlDocument toastXml = new XmlDocument();
-            toastXml.LoadXml(toastXmlString);
-            ToastNotification toast = new ToastNotification(toastXml);
-            ToastNotificationManager.CreateToastNotifier().Show(toast);
-        }
+            string version = "1.0.2"; // Текущая версия
+            string versionNew = await GetVersionFromServerAsync("https://kotiphotos.serv00.net/version.txt");
 
+            if (versionNew == null)
+            {
+                // Если не удалось получить версию с сервера, выводим ошибку
+                Notify("Произошла ошибка", "Не удалось проверить обновления: Ошибка сети или сервер недоступен.", "Закрыть");
+            }
+            else
+            {
+                // Если версия отличается, показываем уведомление о доступном обновлении
+                if (versionNew != version)
+                {
+                    Notify("Доступно обновление", "Есть новая версия приложения. Обновите до версии " + versionNew, "Закрыть");
+                }
+                else
+                {
+                    // Если версия актуальна
+                    Notify("Проверка обновлений", "Вы уже используете последнюю версию.", "Закрыть");
+                }
+            }
+        }
         private void Notify(string notificationTitle, string notificationContent, string button1String)
         {
             string title = $"{notificationTitle}";

@@ -9,7 +9,7 @@
   <Identity
     Name="f82c28cb-831e-4845-b47f-9103db537e56"
     Publisher="CN=vovanchik"
-    Version="1.0.1.0" />
+    Version="1.0.2.0" />
 
   <mp:PhoneIdentity PhoneProductId="f82c28cb-831e-4845-b47f-9103db537e56" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
